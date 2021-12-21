@@ -4,12 +4,17 @@ import Card from "../components/Card"
 import "./Characters.css"
 const Characters = () => {
 	const [characters, setCharacters] = useState([])
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
 		const getData = () => {
 			fetch("https://harrypotterapi20.herokuapp.com/characters")
 				.then((res) => res.json())
-				.then((res) => console.log(res) || setCharacters(res))
+				.then((res) => {
+					console.log(res)
+					setCharacters(res)
+					setIsLoading(true)
+				})
 		}
 		getData()
 	}, [])
@@ -18,14 +23,18 @@ const Characters = () => {
 		<div>
 			Characters !
 			<div className="GaleryCharacters">
-				{characters.map((character) => (
-					<Card
-						key={character.id}
-						id={character.id}
-						name={character.name}
-						image={character.image}
-					/>
-				))}
+				{isLoading ? (
+					characters.map((character) => (
+						<Card
+							key={character.id}
+							id={character.id}
+							name={character.name}
+							image={character.image}
+						/>
+					))
+				) : (
+					<div>...Loading</div>
+				)}
 			</div>
 		</div>
 	)

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 
 import Characters from "./screen/Characters"
+import CharactersDetails from "./screen/CharactersDetails"
 import Home from "./screen/Home"
 
 import Header from "./components/Header"
@@ -14,6 +15,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/characters" element={<Characters />} />
+				<Route path="/characters/:id" element={<CharactersDetails />} />
 			</Routes>
 		</div>
 	)
